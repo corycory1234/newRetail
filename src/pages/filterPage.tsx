@@ -151,7 +151,7 @@ export function FilterPage () {
     </div>
     {/** Header導覽列 */}
 
-    <div className="grid grid-cols-12">
+    <div className="grid grid-cols-12 gap-4">
       <div className="col-sapn-2 lg:col-span-3">
         <FilterBar
           inputMinPrice={inputMinPirce}
@@ -178,11 +178,12 @@ export function FilterPage () {
     </Sort>
 
 
-
-    <Pagination
-      currentPage={currentPage}
-      totalPages={totalPages}
-      handlePage={setCurrentPage}>
-    </Pagination>
+    <div className="flex justify-center items-center">
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        handlePage={setCurrentPage}>
+      </Pagination>
+    </div>
   </div>
 }
