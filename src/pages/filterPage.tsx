@@ -6,6 +6,7 @@ import { FilterBar } from "../components/filterBar";
 import { ProductList } from "../components/productList";
 import { Pagination } from "../components/pagination";
 import { Sort } from "../components/sort";
+import { Header } from "../components/Header";
 
 export function FilterPage () {
   const [dataList, setDataList] = useState<Item[]>(jsonList);
@@ -138,33 +139,45 @@ export function FilterPage () {
     console.log(paginationData);
   },[paginationData]);
 
-  return <div className="flex justify-center items-center">
-    <Keyword
-      inputKeyword={inputKeyword}
-      paginationData={paginationData}
-      handleKeyword={setInputKeyword}>
-    </Keyword>
+  return <div className="container mx-auto">
+    {/** Header導覽列 */}
+    <div className="flex justify-between items-center">
+      <Header></Header>
+      <Keyword
+        inputKeyword={inputKeyword}
+        paginationData={paginationData}
+        handleKeyword={setInputKeyword}>
+      </Keyword>
+    </div>
+    {/** Header導覽列 */}
+
+    <div className="grid grid-cols-12">
+      <div className="col-sapn-2 lg:col-span-3">
+        <FilterBar
+          inputMinPrice={inputMinPirce}
+          inputMaxPrice={inputMaxPirce}
+          hasStock={hasStock}
+          handleMinPrice={setinputMinPrice}
+          handleMaxPrice={setinputMaxPrice}
+          handleStockChange={setHasStock}
+          category={category}
+          handleCategory={handleCategory}
+          >
+        </FilterBar>
+      </div>
+
+      <div className="col-span-10 lg:col-span-9">
+        <ProductList
+          paginationData={paginationData}>
+        </ProductList>
+      </div>
+    </div>
     
     <Sort
       handleSort={setSort}>
     </Sort>
 
-    <FilterBar
-      inputMinPrice={inputMinPirce}
-      inputMaxPrice={inputMaxPirce}
-      hasStock={hasStock}
-      handleMinPrice={setinputMinPrice}
-      handleMaxPrice={setinputMaxPrice}
-      handleStockChange={setHasStock}
-      category={category}
-      handleCategory={handleCategory}
-      >
 
-    </FilterBar>
-
-    <ProductList
-      paginationData={paginationData}>
-    </ProductList>
 
     <Pagination
       currentPage={currentPage}

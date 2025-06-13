@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 interface Props {
   inputMinPrice: number;
   inputMaxPrice: number;
@@ -10,21 +12,34 @@ interface Props {
 };
 
 export function FilterBar ({inputMinPrice, inputMaxPrice, hasStock, category, handleMinPrice, handleMaxPrice, handleStockChange, handleCategory} : Props) {
-  console.log(category);
-  return <>
-  <div>
-    {/** 價錢範圍 CheckBox */}
-    <label htmlFor="minPrice">
-      最低
-      <input type="number" id="minPrice" min="0" max="99999" value={inputMinPrice}
-        onChange={(event) => handleMinPrice(+ event.target.value)}/>
-    </label>
+  // console.log(category);
+  const [showPrice, setShowPrice] = useState<boolean>(false);
 
-    <label htmlFor="maxPrice">
-      最高
-      <input type="number" id="maxPrice" min='1' max="99999" value={inputMaxPrice}
-        onChange={(event) => handleMaxPrice(+ event.target.value)}/>
-    </label>
+  return <>
+  <div className="flex flex-col gap-2 border">
+    
+    {/** 價錢範圍 CheckBox */}
+    <p className="font-bold text-xl flex justify-between cursor-pointer"
+      onClick={() => setShowPrice(!showPrice)}>價格區間
+      <span>{showPrice ? "▲" : "▼"}</span>
+    </p>
+    {showPrice && 
+      <div className="flex justify-between">
+        <label htmlFor="minPrice" className="flex flex-col">
+          最低
+          <input type="number" id="minPrice" min="0" max="99999" value={inputMinPrice}
+            onChange={(event) => handleMinPrice(+ event.target.value)}
+            className="border rounded w-10 lg:w-36"/>
+        </label>
+          
+        <label htmlFor="maxPrice" className="flex flex-col">
+          最高
+          <input type="number" id="maxPrice" min='1' max="99999" value={inputMaxPrice}
+            onChange={(event) => handleMaxPrice(+ event.target.value)}
+            className="border rounded w-10 lg:w-36"/>
+        </label>
+      </div>
+    }
     {/** 價錢範圍 CheckBox */}
     
     {/** 類別 CheckBox */}
