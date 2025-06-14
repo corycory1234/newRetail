@@ -151,8 +151,8 @@ export function FilterPage () {
     </div>
     {/** Header導覽列 */}
 
-    <div className="grid grid-cols-12 gap-4">
-      <div className="col-sapn-2 lg:col-span-3">
+    <div className="flex justify-between gap-4">
+      <div className="basis-1/4">
         <FilterBar
           inputMinPrice={inputMinPirce}
           inputMaxPrice={inputMaxPirce}
@@ -166,16 +166,20 @@ export function FilterPage () {
         </FilterBar>
       </div>
 
-      <div className="col-span-10 lg:col-span-9">
-        <ProductList
-          paginationData={paginationData}>
-        </ProductList>
+      <div className="basis-3/4">
+        <div className="flex flex-col">
+          <div className="self-end">
+            <Sort
+              handleSort={setSort}>
+            </Sort>
+          </div>
+          <ProductList
+            paginationData={paginationData}>
+          </ProductList>
+        </div>
       </div>
     </div>
     
-    <Sort
-      handleSort={setSort}>
-    </Sort>
 
 
     <div className="flex justify-center items-center">

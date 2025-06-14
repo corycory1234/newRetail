@@ -20,7 +20,10 @@ export function ProductList ({paginationData}: {paginationData: Item[]}) {
           <td className="p-2 border">{item.name}</td>
           <td className="p-2 border">{item.category}</td>
           <td className="p-2 border">{item.price}</td>
-          <td className="p-2 border">{item.inStock ? '是' : '否'}</td>
+          <td className={`p-2 border 
+            ${item.inStock === false ? 'text-red-500' : ''}`}>
+            {item.inStock ? '是' : '否'}
+          </td>
         </tr>
       </tbody>
     })}
