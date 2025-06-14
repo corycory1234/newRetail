@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Modal } from "./modal";
+import type { Item } from "../types/item";
 
 interface Props {
   inputMinPrice: number;
@@ -11,9 +12,10 @@ interface Props {
   handleStockChange: (value: boolean) => void;
   handleCategory: (category: string) => void;
   handleSort: (value: "ascend" | "descend") => void;
+  keywordFilteredData: Item[]
 };
 
-export function FilterMobile ({inputMinPrice, inputMaxPrice, hasStock, category, handleMinPrice, handleMaxPrice, handleStockChange, handleCategory, handleSort} : Props) {
+export function FilterMobile ({inputMinPrice, inputMaxPrice, hasStock, category, handleMinPrice, handleMaxPrice, handleStockChange, handleCategory, handleSort, keywordFilteredData} : Props) {
   const [showPrice, setShowPrice] = useState<boolean>(true);
   const [showCategory, setShowCategory] = useState<boolean>(true);
   const [showStock, setShowStock] = useState<boolean>(true);
@@ -40,13 +42,17 @@ export function FilterMobile ({inputMinPrice, inputMaxPrice, hasStock, category,
 
 
   return <>
-    <div className="flex justify-end items-center gap-2">
-      <p className="lg:hidden cursor-pointer rounded border border-blue-300 px-2 py-1" 
-        onClick={() => setShowFilter(!showFilter)}>篩選▼
-      </p>
-      <p className="lg:hidden cursor-pointer rounded border border-blue-300 px-2 py-1" 
-        onClick={() => setShowSort(!showSort)}>價格排序▼
-      </p>
+    <div className="lg:hidden flex justify-between items-center gap-2">
+      <p>共 {keywordFilteredData.length} 件商品</p>
+
+      <div className="flex items-center gap-2">
+        <p className="lg:hidden cursor-pointer rounded border border-blue-300 px-2 py-1" 
+          onClick={() => setShowFilter(!showFilter)}>篩選▼
+        </p>
+        <p className="lg:hidden cursor-pointer rounded border border-blue-300 px-2 py-1" 
+          onClick={() => setShowSort(!showSort)}>價格排序▼
+        </p>
+      </div>
     </div>
 
     {/** Modal彈窗 */}

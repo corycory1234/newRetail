@@ -91,7 +91,7 @@ export function Pagination ({ currentPage, totalPages, handlePage} : Props) {
         <input type="number"
           min="1"
           max={totalPages}
-          className="border rounded p-2 text-center"
+          className="border rounded px-2 text-center"
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
               const value = + (event.target as HTMLInputElement).value;

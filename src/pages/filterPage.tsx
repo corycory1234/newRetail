@@ -138,7 +138,8 @@ export function FilterPage () {
 
   useEffect(()=> {
     console.log(paginationData);
-  },[paginationData]);
+    console.log(keywordFilteredData, "被篩選後幾筆");
+  },[paginationData, keywordFilteredData]);
 
   return <div className="container mx-auto py-2 flex flex-col gap-4">
     {/** Header導覽列 */}
@@ -164,7 +165,8 @@ export function FilterPage () {
           handleStockChange={setHasStock}
           category={category}
           handleCategory={handleCategory}
-          handleSort={setSort}> 
+          handleSort={setSort}
+          keywordFilteredData={keywordFilteredData}> 
         </FilterMobile>
 
         <FilterPc
@@ -182,11 +184,12 @@ export function FilterPage () {
 
       <div className="basis-3/4">
         <div className="flex flex-col">
-          <div className="hidden lg:flex lg:self-end">
+          {/* <div className="hidden lg:flex"> */}
             <Sort
-              handleSort={setSort}>
+              handleSort={setSort}
+              keywordFilteredData={keywordFilteredData}>
             </Sort>
-          </div>
+          {/* </div> */}
           <ProductList
             paginationData={paginationData}>
           </ProductList>

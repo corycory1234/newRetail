@@ -1,6 +1,9 @@
 import type { Item } from "../types/item";
+interface Props {
+  paginationData: Item[];
+}
 
-export function ProductList ({paginationData}: {paginationData: Item[]}) {
+export function ProductList ({paginationData}: Props) {
 
   return <>
     {/** 表格Layout - PC */}
@@ -51,7 +54,7 @@ export function ProductList ({paginationData}: {paginationData: Item[]}) {
           <div className="flex">
             <p className="font-bold">庫存：</p>
             <span className={`${item.inStock === false ? 'text-red-600' : ''}`}>
-              {item.inStock ? '有' : '無'}
+              {item.inStock ? '有庫存' : '無'}
             </span>
           </div>
         </div>
