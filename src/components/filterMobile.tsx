@@ -10,13 +10,17 @@ interface Props {
   handleMaxPrice: (value: number) => void;
   handleStockChange: (value: boolean) => void;
   handleCategory: (category: string) => void;
+  handleSort: (value: "ascend" | "descend") => void;
 };
 
-export function FilterMobile ({inputMinPrice, inputMaxPrice, hasStock, category, handleMinPrice, handleMaxPrice, handleStockChange, handleCategory} : Props) {
+export function FilterMobile ({inputMinPrice, inputMaxPrice, hasStock, category, handleMinPrice, handleMaxPrice, handleStockChange, handleCategory, handleSort} : Props) {
   const [showPrice, setShowPrice] = useState<boolean>(true);
   const [showCategory, setShowCategory] = useState<boolean>(true);
   const [showStock, setShowStock] = useState<boolean>(true);
   const [showFilter, setShowFilter] = useState<boolean>(false);
+  const [showSort, setShowSort] = useState<boolean>(false);
+  const priceRange: ("ascend" | "descend")[] = ["ascend", "descend"];
+
 
   // 1. 重設條件
   const clearFilter = () => {
@@ -26,13 +30,27 @@ export function FilterMobile ({inputMinPrice, inputMaxPrice, hasStock, category,
     handleStockChange(false);
   };
 
+  // 2. 點擊 Sort, 子傳父"ascend"或"descend" && 換背景色
+  const [sortBgColor, setSortBgColor] = useState<number>(-1);
+  const confirmSort = (sort: "ascend" | "descend", index: number) => {
+    handleSort(sort)
+    setSortBgColor(index);
+  };
+
+
+
   return <>
-    <div className="flex justify-end items-center">
-      <p className="lg:hidden cursor-pointer" onClick={() => setShowFilter(!showFilter)}>篩選▼</p>
+    <div className="flex justify-end items-center gap-2">
+      <p className="lg:hidden cursor-pointer rounded border border-blue-300 px-2 py-1" 
+        onClick={() => setShowFilter(!showFilter)}>篩選▼
+      </p>
+      <p className="lg:hidden cursor-pointer rounded border border-blue-300 px-2 py-1" 
+        onClick={() => setShowSort(!showSort)}>價格排序▼
+      </p>
     </div>
 
     {/** Modal彈窗 */}
-    <Modal isOpen={showFilter} onClose={() => setShowFilter(false)}>
+    <Modal isOpen={showFilter} onClose={() => setShowFilter(false)} height={`h-4/5`}>
       <div className="container mx-auto flex flex-col justify-center py-2 gap-4">
           <h2 className="font-bold text-2xl text-center">篩選</h2>
           
@@ -110,5 +128,21 @@ export function FilterMobile ({inputMinPrice, inputMaxPrice, hasStock, category,
       </div>
     </Modal>
     {/** Modal彈窗 */}
+
+    <Modal isOpen={showSort} onClose={() => setShowSort(false)} height={`h-1/4`}>
+      <div className="container mx-auto flex flex-col py-2 gap-2">
+        <p className="font-bold text-2xl self-center">價格排序</p>
+          
+          {priceRange.map((item, index) => {
+            return <p onClick={() => confirmSort(item, index)}
+              key={index} 
+              className={`font-bold hover:bg-blue-300 focus:text-blue-300 px-2 cursor-pointer
+              ${sortBgColor === index ? 'bg-blue-300' : ''}`}
+              >
+              {item === "ascend" ? "價格低到高" : "價格高到低"}
+            </p>
+          } )}
+      </div>
+    </Modal>
   </>
 }

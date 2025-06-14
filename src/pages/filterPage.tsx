@@ -163,7 +163,8 @@ export function FilterPage () {
           handleMaxPrice={setinputMaxPrice}
           handleStockChange={setHasStock}
           category={category}
-          handleCategory={handleCategory}> 
+          handleCategory={handleCategory}
+          handleSort={setSort}> 
         </FilterMobile>
 
         <FilterPc
@@ -181,7 +182,7 @@ export function FilterPage () {
 
       <div className="basis-3/4">
         <div className="flex flex-col">
-          <div className="self-end">
+          <div className="hidden lg:flex lg:self-end">
             <Sort
               handleSort={setSort}>
             </Sort>
