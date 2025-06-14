@@ -11,15 +11,14 @@ interface Props {
   handleCategory: (category: string) => void;
 };
 
-export function FilterBar ({inputMinPrice, inputMaxPrice, hasStock, category, handleMinPrice, handleMaxPrice, handleStockChange, handleCategory} : Props) {
-  // console.log(category);
-  const [showPrice, setShowPrice] = useState<boolean>(false);
-  const [showCategory, setShowCategory] = useState<boolean>(false);
-  const [showStock, setShowStock] = useState<boolean>(false);
+export function FilterPc ({inputMinPrice, inputMaxPrice, hasStock, category, handleMinPrice, handleMaxPrice, handleStockChange, handleCategory} : Props) {
+  const [showPrice, setShowPrice] = useState<boolean>(true);
+  const [showCategory, setShowCategory] = useState<boolean>(true);
+  const [showStock, setShowStock] = useState<boolean>(true);
 
   return <>
-  <div className="flex flex-col gap-4">
-    
+  <div className="hidden lg:flex flex-col gap-4">
+
     {/** 價錢範圍 CheckBox */}
     <div className="flex flex-col gap-2 pb-6 border-b border-b-gray-300">
       <p className="font-bold text-xl flex justify-between cursor-pointer"
@@ -27,19 +26,19 @@ export function FilterBar ({inputMinPrice, inputMaxPrice, hasStock, category, ha
         <span>{showPrice ? "▲" : "▼"}</span>
       </p>
       {showPrice && 
-        <div className="flex justify-between">
+        <div className="flex gap-4">
           <label htmlFor="minPrice" className="flex flex-col">
-            最低
+            最低 (NT$)
             <input type="number" id="minPrice" min="0" max="99999" value={inputMinPrice}
               onChange={(event) => handleMinPrice(+ event.target.value)}
-              className="border rounded pl-4 w-10 lg:w-36 lg:h-10"/>
+              className="border rounded pl-4 w-10 lg:w-auto lg:h-10"/>
           </label>
-            
+            <p className="self-center pt-5">—</p>
           <label htmlFor="maxPrice" className="flex flex-col">
-            最高
+            最高 (NT$)
             <input type="number" id="maxPrice" min='1' max="99999" value={inputMaxPrice}
               onChange={(event) => handleMaxPrice(+ event.target.value)}
-              className="border rounded pl-4 w-10 lg:w-36 lg:h-10"/>
+              className="border rounded pl-4 w-10 lg:w-auto lg:h-10"/>
           </label>
         </div>
       }
@@ -83,6 +82,7 @@ export function FilterBar ({inputMinPrice, inputMaxPrice, hasStock, category, ha
       }
     </div>
     {/** 庫存 CheckBox */}
+    
 
   </div>
   </>

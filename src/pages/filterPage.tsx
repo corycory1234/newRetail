@@ -2,19 +2,20 @@ import jsonList from "../json/jsonList.json";
 import { useState, useEffect, useMemo } from "react";
 import type { Item } from "../types/item";
 import { Keyword } from "../components/keyword";
-import { FilterBar } from "../components/filterBar";
+import { FilterPc } from "../components/filterPc";
 import { ProductList } from "../components/productList";
 import { Pagination } from "../components/pagination";
 import { Sort } from "../components/sort";
 import { Header } from "../components/Header";
+import { FilterMobile } from "../components/filterMobile";
 
 export function FilterPage () {
   const [dataList, setDataList] = useState<Item[]>(jsonList);
   const [inputKeyword, setInputKeyword] = useState<string>('');
   const [keyword, setKeyword] = useState<string>("");
   const [hasStock, setHasStock] = useState<boolean>(false);
-  const [inputMinPirce, setinputMinPrice] = useState<number>(0);
-  const [inputMaxPirce, setinputMaxPrice] = useState<number>(99999);
+  const [inputMinPrice, setinputMinPrice] = useState<number>(0);
+  const [inputMaxPrice, setinputMaxPrice] = useState<number>(99999);
   const [minPrice, setMinPrice] = useState<number>(0);
   const [maxPrice, setMaxPrice] = useState<number>(99999);
   const [category, setCategory] = useState<string[]>([]);
@@ -33,16 +34,16 @@ export function FilterPage () {
   // 2. Debounce 防抖, 500毫秒再更新$$範圍
   useEffect(() => {
     const timerId = setTimeout(() => {
-      setMinPrice(inputMinPirce);
+      setMinPrice(inputMinPrice);
     }, 500);
     return () => clearTimeout(timerId);
-  },[inputMinPirce]);
+  },[inputMinPrice]);
   useEffect(() => {
     const timerId = setTimeout(() => {
-      setMaxPrice(inputMaxPirce);
+      setMaxPrice(inputMaxPrice);
     }, 500);
     return () => clearTimeout(timerId);
-  },[inputMaxPirce]);
+  },[inputMaxPrice]);
 
   // 3. 類別切換 (多選checkBox)
   const handleCategory = (category: string) => {
@@ -151,11 +152,23 @@ export function FilterPage () {
     </div>
     {/** Header導覽列 */}
 
-    <div className="flex justify-between gap-4">
-      <div className="basis-1/4">
-        <FilterBar
-          inputMinPrice={inputMinPirce}
-          inputMaxPrice={inputMaxPirce}
+    {/** 篩選 & 商品 */}
+    <div className="flex flex-col lg:flex-row lg:justify-between gap-4">
+      <div className="lg:basis-1/4">
+        <FilterMobile
+          inputMinPrice={inputMinPrice}
+          inputMaxPrice={inputMaxPrice}
+          hasStock={hasStock}
+          handleMinPrice={setinputMinPrice}
+          handleMaxPrice={setinputMaxPrice}
+          handleStockChange={setHasStock}
+          category={category}
+          handleCategory={handleCategory}> 
+        </FilterMobile>
+
+        <FilterPc
+          inputMinPrice={inputMinPrice}
+          inputMaxPrice={inputMaxPrice}
           hasStock={hasStock}
           handleMinPrice={setinputMinPrice}
           handleMaxPrice={setinputMaxPrice}
@@ -163,7 +176,7 @@ export function FilterPage () {
           category={category}
           handleCategory={handleCategory}
           >
-        </FilterBar>
+        </FilterPc>
       </div>
 
       <div className="basis-3/4">
@@ -179,6 +192,7 @@ export function FilterPage () {
         </div>
       </div>
     </div>
+    {/** 篩選 & 商品 */}
     
 
 
