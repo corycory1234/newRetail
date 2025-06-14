@@ -140,7 +140,7 @@ export function FilterPage () {
     console.log(paginationData);
   },[paginationData]);
 
-  return <div className="container mx-auto">
+  return <div className="container mx-auto py-2 flex flex-col gap-4">
     {/** Header導覽列 */}
     <div className="flex justify-between items-center">
       <Header></Header>
@@ -198,11 +198,14 @@ export function FilterPage () {
 
 
     <div className="flex justify-center items-center">
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        handlePage={setCurrentPage}>
-      </Pagination>
+      <div className="lg:basis-1/4"></div>
+      <div className="lg:basis-3/4">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          handlePage={setCurrentPage}>
+        </Pagination>
+      </div>
     </div>
   </div>
 }

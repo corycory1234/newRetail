@@ -7,8 +7,8 @@ interface Props {
 };
 
 export function Pagination ({ currentPage, totalPages, handlePage} : Props) {
-  // 1. 每次最多10張分頁
-  const maxVisible = 10;
+  // 1. 每次最多5張分頁
+  const maxVisible = 5;
   // 2. 每往下點1頁, 就+1頁, 如:2~11 >> 3~12頁 >> 4~13頁... (動態生成頁碼)
   const visiblePages = useMemo(() => {
     let start = currentPage;
@@ -26,18 +26,18 @@ export function Pagination ({ currentPage, totalPages, handlePage} : Props) {
       <button 
         disabled={currentPage === 1} 
         onClick={() => handlePage(1)}
-        className={`border rounded cursor-pointer px-2
+        className={`border rounded cursor-pointer px-1 lg:py-2 lg:px-4
         ${currentPage > 1 ? 'hover:bg-blue-300' : ''}
         `}
         >
-        ＜＜
+        |＜
       </button>
       {/** 第1頁 */}
 
       {/** 上一頁 */}
       <button disabled={currentPage === 1} 
         onClick={() => handlePage(currentPage -1)}
-        className={`border rounded cursor-pointer px-2
+        className={`border rounded cursor-pointer px-1 lg:py-2 lg:px-4
         ${currentPage > 1 ? 'hover:bg-blue-300' : ''}
         `}
         >
@@ -51,7 +51,7 @@ export function Pagination ({ currentPage, totalPages, handlePage} : Props) {
         return <button
           key={page}
           onClick={() => handlePage(page)}
-          className={`border rounded cursor-pointer hover:bg-blue-300 px-2
+          className={`border rounded cursor-pointer hover:bg-blue-300 px-2 lg:py-2 lg:px-4
             ${currentPage === page ? 'bg-blue-300' : ''}`
           }>
           {page}
@@ -63,7 +63,7 @@ export function Pagination ({ currentPage, totalPages, handlePage} : Props) {
       <button 
         disabled={currentPage === totalPages} 
         onClick={() => handlePage(currentPage +1)}
-        className={`border rounded cursor-pointer px-2
+        className={`border rounded cursor-pointer px-1 lg:py-2 lg:px-4
         ${currentPage !== totalPages ? 'hover:bg-blue-300' : ''}
         `}
         >
@@ -75,11 +75,11 @@ export function Pagination ({ currentPage, totalPages, handlePage} : Props) {
       <button 
         disabled={currentPage === totalPages}
         onClick={() => handlePage(totalPages)}
-        className={`border rounded cursor-pointer px-2
+        className={`border rounded cursor-pointer px-1 lg:py-2 lg:px-4
         ${currentPage !== totalPages ? 'hover:bg-blue-300' : ''}
         `}
         >
-        ＞＞
+        ＞|
       </button>
       {/** 最後一頁 */}
 
