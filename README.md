@@ -17,7 +17,7 @@
 
 | 商品列表（含分頁）
 |--------------------|------------------|
-| ![桌機版截圖](./public/pc.png) | ![手機版](./public/mobile.png) |
+| <div align="center"> <img src="./public/mobile.png" alt="手機版畫面" width="300"/> <img src="./public/pc.png" alt="桌面版畫面" width="500"/> </div>|
 
 > 📌 建議圖片尺寸為 800px 寬，可存放於 `public/` 目錄。
 
