@@ -189,7 +189,8 @@ export function FilterPage () {
               keywordFilteredData={keywordFilteredData}>
             </Sort>
           <ProductList
-            paginationData={paginationData}>
+            paginationData={paginationData}
+            inputKeyword={inputKeyword}>
           </ProductList>
         </div>
       </div>
@@ -204,7 +205,8 @@ export function FilterPage () {
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
-          handlePage={setCurrentPage}>
+          handlePage={setCurrentPage}
+          paginationData={paginationData}>
         </Pagination>
       </div>
     </div>

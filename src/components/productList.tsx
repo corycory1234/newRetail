@@ -1,12 +1,19 @@
 import type { Item } from "../types/item";
 interface Props {
   paginationData: Item[];
+  inputKeyword: string;
 }
 
-export function ProductList ({paginationData}: Props) {
-
+export function ProductList ({paginationData, inputKeyword}: Props) {
+  
   return <>
     {/** 表格Layout - PC */}
+    {paginationData.length <=0 ? 
+      <div className="flex flex-col justify-center items-center gap-4 translate-y-1/2">
+          <p>找不到 <span className="text-red-500">{`${inputKeyword}`}</span> 商品</p>
+          <img src={`${import.meta.env.BASE_URL}public/noProduct.png`} alt="" />
+      </div> 
+    :
     <div className="grid grid-flow-row grid-rows-1">
       <table className="hidden lg:table w-full border border-gray-300 text-left text-sm">
         <thead className="bg-gray-100">
@@ -32,6 +39,8 @@ export function ProductList ({paginationData}: Props) {
       })}
       </table>
     </div>
+    
+    }
     {/** 表格Layout - PC */}
 
     {/** 卡片Layout - 手機 */}
