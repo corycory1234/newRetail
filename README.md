@@ -15,11 +15,8 @@
 
 ## 🖼️ 專案畫面截圖
 
-| 商品列表（含分頁）
-|--------------------|------------------|
-| <div align="center"> <img src="./public/mobile.png" alt="手機版畫面" width="300"/> <img src="./public/pc.png" alt="桌面版畫面" width="500"/> </div>|
-
-> 📌 建議圖片尺寸為 800px 寬，可存放於 `public/` 目錄。
+- **商品列表（含分頁）**
+<div align="center"> <img src="./public/pc.png" alt="手機版畫面" width="300"/> <img src="./public/mobile.png" alt="桌面版畫面" width="500"/> </div>|
 
 ## 💡 專案特色與最佳實踐
 
