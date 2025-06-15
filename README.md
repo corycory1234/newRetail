@@ -64,7 +64,7 @@
   - `lg: 1024px`（筆電）
   - `xl: 1280px`（桌機）
 
-## 📁 專案結構
+```## 📁 專案結構
 
 newRetail/
 ├── public/ # 靜態資源（含截圖）
@@ -79,7 +79,7 @@ newRetail/
 ├── vite.config.ts # Vite 設定（含 base 設定）
 ├── package.json
 └── README.md # 專案說明文件
-
+```
 
 ## 📦 安裝與啟動
 
