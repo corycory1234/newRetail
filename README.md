@@ -16,7 +16,7 @@
 ## 🖼️ 專案畫面截圖
 
 - **商品列表（含分頁）**
-<div align="center"> <img src="./public/pc.png" alt="手機版畫面" width="500"/> <img src="./public/mobile.png" alt="桌面版畫面" width="300"/> </div>
+<div align="center"> <img src="./public/mobile.png" alt="手機版畫面" width="300"/> <img src="./public/pc.png" alt="桌面版畫面" width="500"/> </div>
 
 ## 💡 專案特色與最佳實踐
 
