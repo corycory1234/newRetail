@@ -6,7 +6,7 @@ import { FilterPc } from "../components/filterPc";
 import { ProductList } from "../components/productList";
 import { Pagination } from "../components/pagination";
 import { Sort } from "../components/sort";
-import { Header } from "../components/Header";
+import { Header } from "../components/header";
 import { FilterMobile } from "../components/filterMobile";
 
 export function FilterPage () {
@@ -184,12 +184,10 @@ export function FilterPage () {
 
       <div className="basis-3/4">
         <div className="flex flex-col">
-          {/* <div className="hidden lg:flex"> */}
             <Sort
               handleSort={setSort}
               keywordFilteredData={keywordFilteredData}>
             </Sort>
-          {/* </div> */}
           <ProductList
             paginationData={paginationData}>
           </ProductList>
