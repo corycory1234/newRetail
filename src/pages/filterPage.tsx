@@ -132,14 +132,10 @@ export function FilterPage () {
     setCurrentPage(1)
   }, [hasStock, minPrice, maxPrice, category])
 
-
-  
-  
-
-  useEffect(()=> {
-    console.log(paginationData);
-    console.log(keywordFilteredData, "被篩選後幾筆");
-  },[paginationData, keywordFilteredData]);
+  // useEffect(()=> {
+  //   console.log(paginationData);
+  //   console.log(keywordFilteredData, "被篩選後幾筆");
+  // },[paginationData, keywordFilteredData]);
 
   return <div className="container mx-auto py-2 flex flex-col gap-4">
     {/** Header導覽列 */}
@@ -197,8 +193,7 @@ export function FilterPage () {
     </div>
     {/** 篩選 & 商品 */}
     
-
-
+    {/** 分頁 */}
     <div className="flex justify-center items-center">
       <div className="lg:basis-1/4"></div>
       <div className="lg:basis-3/4">
@@ -210,5 +205,7 @@ export function FilterPage () {
         </Pagination>
       </div>
     </div>
+    {/** 分頁 */}
+
   </div>
 }
