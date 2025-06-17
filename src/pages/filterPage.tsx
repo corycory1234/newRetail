@@ -137,9 +137,9 @@ export function FilterPage () {
   //   console.log(keywordFilteredData, "被篩選後幾筆");
   // },[paginationData, keywordFilteredData]);
 
-  return <div className="container mx-auto py-2 flex flex-col gap-4">
+  return <div className="container mx-auto pb-2 flex flex-col gap-4">
     {/** Header導覽列 */}
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center bg-white fixed z-10 container pl-0 pr-7 py-2">
       <Header></Header>
       <Keyword
         inputKeyword={inputKeyword}
@@ -150,7 +150,7 @@ export function FilterPage () {
     {/** Header導覽列 */}
 
     {/** 篩選 & 商品 */}
-    <div className="flex flex-col lg:flex-row lg:justify-between gap-4">
+    <div className="flex flex-col lg:flex-row lg:justify-between gap-4 mt-[57.06px] lg:mt-[104px]">
       <div className="lg:basis-1/4">
         <FilterMobile
           inputMinPrice={inputMinPrice}
