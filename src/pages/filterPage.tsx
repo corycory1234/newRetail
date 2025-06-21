@@ -14,8 +14,8 @@ export function FilterPage () {
   const [inputKeyword, setInputKeyword] = useState<string>('');
   const [keyword, setKeyword] = useState<string>("");
   const [hasStock, setHasStock] = useState<boolean>(false);
-  const [inputMinPrice, setinputMinPrice] = useState<number>(0);
-  const [inputMaxPrice, setinputMaxPrice] = useState<number>(99999);
+  const [inputMinPrice, setInputMinPrice] = useState<number>(0);
+  const [inputMaxPrice, setInputMaxPrice] = useState<number>(99999);
   const [minPrice, setMinPrice] = useState<number>(0);
   const [maxPrice, setMaxPrice] = useState<number>(99999);
   const [category, setCategory] = useState<string[]>([]);
@@ -53,19 +53,20 @@ export function FilterPage () {
     })
   };
 
-  // Step 1: 建立 category -> items Map
+  // 4.1 因應 category 分類, 使用Map物件, 減少時間複雜度, 不然1萬筆資料用filter跑, 太過於線性
   const categoryMap = useMemo(() => {
-    const map = new Map<string, Item[]>();
+    const map = new Map<string, Item[]>(); // 4.2 泛型 <這是 key型別, 這是 value型別>
     for (const item of dataList) {
       if(!map.has(item.category)) {
         map.set(item.category, []);
       };
-      map.get(item.category)!.push(item);
+      map.get(item.category)!.push(item); // 4.3 "!" 這邊是非空斷言, 代表TS肯定這裡不會是undefined或null
     };
     return map;
   }, [dataList]);
   
-  // Step 2: 快速組出符合類別的資料
+  // 4.4 categoryMap 已經組好 5組(A~E)哈希表, 這邊 categoryFilteredData 就直接去拿對應的哈希表, 
+  // 不要用filter去遍歷1萬次, 才撈會打勾的類別
   const categoryFilteredData = useMemo(() => {
     if(category.length === 0) { return dataList };
     const combined: Item[] = [];
@@ -78,7 +79,7 @@ export function FilterPage () {
     return combined
   }, [category, categoryMap, dataList]);
   
-  // 4. 篩選條件後 - 商品Array
+  // 5. 篩選條件後 - 商品Array
   const filteredData = useMemo(() => {
     return categoryFilteredData.filter((item) => {
       const matchStock = hasStock ? item.inStock : true;
@@ -89,21 +90,21 @@ export function FilterPage () {
     })
   },[categoryFilteredData, hasStock, minPrice, maxPrice, category]);
 
-  // 2. Keyword 搜尋邏輯
+  // 6. Keyword 搜尋邏輯
   const keywordFilteredData = useMemo(() => {
-    // 2.1 禁空白
+    // 6.1 禁空白
     if(!keyword || keyword.trim() === "") { return filteredData };
-    // 2.2 輸入"item 1" 或 "item1", 都要被撈到
+    // 6.2 輸入"item 1" 或 "item1", 都要被撈到
     const cleanKeyword = keyword.toLowerCase().replace(/\s+/g, "").trim();
 
     return filteredData.filter((item) => {
-      // 2.3 JSON數據也支持 "item 1" 或 "item1"
+      // 6.3 JSON數據也支持 "item 1" 或 "item1"
       const cleanName = item.name.toLowerCase().replace(/\s+/g, "").trim();
       return cleanName.includes(cleanKeyword)
     });
   },[filteredData, keyword])
 
-  // 8. 高低價排序
+  // 7. 高低價排序
   const sortedData = useMemo(() => {
     const copy = [...keywordFilteredData];
     if(sort === "ascend") {
@@ -117,17 +118,17 @@ export function FilterPage () {
     }
   },[keywordFilteredData, sort])
 
-  // 5. 總頁數
+  // 8. 總頁數
   const totalPages = Math.ceil(keywordFilteredData.length / itemsPerPage);
 
-  // 6. 分頁渲染 - 20筆/每頁
+  // 9. 分頁渲染 - 20筆/每頁
   const paginationData = useMemo(() => {
     const startIndex = (currentPage -1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     return sortedData.slice(startIndex, endIndex);
   }, [sortedData, currentPage]);
   
-  // 7. 若篩選條件更新, 回到第1頁
+  // 10. 若篩選條件更新, 回到第1頁
   useEffect(() => {
     setCurrentPage(1)
   }, [hasStock, minPrice, maxPrice, category])
@@ -156,8 +157,8 @@ export function FilterPage () {
           inputMinPrice={inputMinPrice}
           inputMaxPrice={inputMaxPrice}
           hasStock={hasStock}
-          handleMinPrice={setinputMinPrice}
-          handleMaxPrice={setinputMaxPrice}
+          handleMinPrice={setInputMinPrice}
+          handleMaxPrice={setInputMaxPrice}
           handleStockChange={setHasStock}
           category={category}
           handleCategory={handleCategory}
@@ -169,8 +170,8 @@ export function FilterPage () {
           inputMinPrice={inputMinPrice}
           inputMaxPrice={inputMaxPrice}
           hasStock={hasStock}
-          handleMinPrice={setinputMinPrice}
-          handleMaxPrice={setinputMaxPrice}
+          handleMinPrice={setInputMinPrice}
+          handleMaxPrice={setInputMaxPrice}
           handleStockChange={setHasStock}
           category={category}
           handleCategory={handleCategory}
