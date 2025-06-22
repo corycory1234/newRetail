@@ -90,15 +90,16 @@ export function FilterPage () {
     })
   },[categoryFilteredData, hasStock, minPrice, maxPrice, category]);
 
-  // 6. Keyword 搜尋邏輯
+  // 6. Keyword 搜尋邏輯 - 
+  // 6.1 父組件用 keyword (確定輸入完, 再送數據給API), 子組件用 inputKeyword (單純UI渲染)
   const keywordFilteredData = useMemo(() => {
-    // 6.1 禁空白
+    // 6.2 禁空白
     if(!keyword || keyword.trim() === "") { return filteredData };
-    // 6.2 輸入"item 1" 或 "item1", 都要被撈到
+    // 6.3 輸入"item 1" 或 "item1", 都要被撈到
     const cleanKeyword = keyword.toLowerCase().replace(/\s+/g, "").trim();
 
     return filteredData.filter((item) => {
-      // 6.3 JSON數據也支持 "item 1" 或 "item1"
+      // 6.4 JSON數據也支持 "item 1" 或 "item1"
       const cleanName = item.name.toLowerCase().replace(/\s+/g, "").trim();
       return cleanName.includes(cleanKeyword)
     });
@@ -151,7 +152,7 @@ export function FilterPage () {
     {/** Header導覽列 */}
 
     {/** 篩選 & 商品 */}
-    <div className="flex flex-col lg:flex-row lg:justify-between gap-4 mt-[57.06px] lg:mt-[104px]">
+    <div className="flex flex-col lg:flex-row lg:justify-between gap-4 mt-[57.06px] md:mt-[104px]">
       <div className="lg:basis-1/4">
         <FilterMobile
           inputMinPrice={inputMinPrice}
